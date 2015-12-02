@@ -5,12 +5,18 @@ Classificador de texto implementado como projeto final de Mineração da Web - C
 ## usando o ambiente virtual
 
 O ambiente virtual serve para não termos problemas em rodar o projeto em diferentes máquinas que estão o utilizando. O ambiente virtual nada mais é do que a criação de um ambiente onde todas as bibliotecas serão instaladas a parte no seu computador. Isso é, as bibliotecas que são adicionadas lá não são adicionadas ao seu computador, e não podemos acessá-las se não estivermos no ambiente virtual. Para ligar o ambiente virtual, rodar o comando:
+
 $ source venv/bin/activate
+
 Feito isso, rodar o comando
+
 $ pip install -r requirements.txt
+
 Para obter todas as bibliotecas e baixá-las para o ambiente virtual da sua máquina. 
 Caso alguma biblitoeca nova seja instalada no projeto, então rodar o comando
+
 $ pip freeze > requirements.txt
+
 
 ## usando corpus_reader.py
 
