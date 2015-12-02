@@ -3,7 +3,7 @@ from nltk.stem import PorterStemmer
 from nltk.corpus import stopwords
 import string
 
-class preprocess:
+class PreProcess:
     def __init__(self):
         self.tokenizer = word_tokenize
         self.stemmer = PorterStemmer()
@@ -21,3 +21,8 @@ class preprocess:
 
     def process(self, snts):
         return [self.__process(snt) for snt in snts]
+
+if __name__ == '__main__':
+    pre_process = PreProcess()
+    res = pre_process.process(['Hi my name is Mateus. How are you!?>', 'Hey, this is me!'])
+    print(res)
