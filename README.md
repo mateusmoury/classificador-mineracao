@@ -33,3 +33,19 @@ Após a criação de uma instância `preprocess`, o método `process` recebe uma
 - Tokenização
 - Stemming (algoritmo de Porter)
 - Remoção de stopwords (coleção de 127 palavras de stopwords do NLTK), incluindo dígitos e pontuação
+
+## usando o metrics.py
+
+A classe `MetricsGenerator` recebe dois arrrays:
+
+- `ytrue`: labels reais (ground truth) dos documentos de teste;
+- `ypred`: labels que o classificador atribuiu (predictions) aos documentos de teste.
+
+Exemplo:
+```python
+mg = MetricsGenerator(ytrue, ypred)
+print "Precision: %.2f" % (mg.macro_precision())
+print "Recall of class \'baseball\': %.2f" % (mg.class_recall('baseball'))
+print 'Storing confusion matrix graph on file \"confusion_matrix.png\"'
+mg.plot_confusion_matrix()
+```

@@ -1,6 +1,6 @@
 """
-The precision is the ratio ``tp / (tp + fp)`` where ``tp`` is the number of
-The recall is the ratio ``tp / (tp + fn)`` where ``tp`` is the number of
+The precision is the ratio ``tp / (tp + fp)``
+The recall is the ratio ``tp / (tp + fn)``
 """
 import numpy as np
 import matplotlib.pyplot as plt
@@ -61,4 +61,4 @@ class MetricsGenerator:
         plt.tight_layout()
         plt.ylabel('Classe Real')
         plt.xlabel('Classe Prevista')
-        plt.show()
+        plt.savefig('confusion_matrix.png')
