@@ -11,7 +11,7 @@ class PreProcess:
         self.digits = string.digits
         self.stop = stopwords.words("english")
 
-    def __process(self, snt):
+    def process_sent(self, snt):
         snt = self.tokenizer(snt)
         snt = [self.stemmer.stem_word(wrd) for wrd in snt if \
                     wrd not in self.stop and \
@@ -20,7 +20,7 @@ class PreProcess:
         return snt
 
     def process(self, snts):
-        return [self.__process(snt) for snt in snts]
+        return [self.process_sent(snt) for snt in snts]
 
 if __name__ == '__main__':
     pre_process = PreProcess()
