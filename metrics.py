@@ -3,24 +3,34 @@ The precision is the ratio ``tp / (tp + fp)``
 The recall is the ratio ``tp / (tp + fn)``
 """
 import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.metrics import confusion_matrix as confmat
+from functools import reduce
+# import matplotlib.pyplot as plt
+# from sklearn.metrics import confusion_matrix as confmat
 
 class MetricsGenerator:
     def __init__(self, ytrue, ypred):
         self.ytrue = ytrue
         self.ypred = ypred
-        self.cm = confmat(ytrue, ypred)
+        # self.cm = confmat(ytrue, ypred)
         self.classes = set(ytrue)
 
     def class_precision(self, label):
         self.tp = reduce(lambda x,y: x+y, [1 for i in self.ytrue if i==label])
-        self.fp = reduce(lambda x,y: x+y, [1 for i in self.ypred if i==label])    
+        self.fp = reduce(
+            lambda x,y: x+y, 
+                [1 for i, v in enumerate(self.ypred) if v==label\
+                and self.ytrue[i] != label]
+            )    
         return self.tp/(self.tp+self.fp+.0)
 
     def class_recall(self, label):
         self.tp = reduce(lambda x,y: x+y, [1 for i in self.ytrue if i==label])
-        self.fn = reduce(lambda x,y: x+y, [1 for i in self.ypred if i!=label])
+        # self.fn = reduce(lambda x,y: x+y, [1 for i in self.ypred if i!=label])
+        self.fn = reduce(
+            lambda x,y: x+y, 
+                [1 for i, v in enumerate(self.ypred) if v!=label\
+                and self.ytrue[i] == label]
+            )
         return self.tp/(self.tp+self.fn+.0)
 
     def class_fscore(self, label):
@@ -46,19 +56,24 @@ class MetricsGenerator:
             cumsum += self.class_fscore(class_)
         return cumsum/3.        
 
-    def confusion_matrix(ytrue, ypred):
-        return self.cm
+    def accuracy(self):
+        ytrue = np.array(self.ytrue)
+        ypred = np.array(self.ypred)
+        return (ytrue==ypred).sum() / (len(ytrue)+.0)
 
-    def plot_confusion_matrix(
-            self, title='Confusion matrix', cmap=plt.cm.Blues
-            ):
-        plt.imshow(self.cm, interpolation='nearest', cmap=cmap)
-        plt.title(title)
-        plt.colorbar()
-        tick_marks = np.arange(3)
-        plt.xticks(tick_marks, sorted(list(self.classes)), rotation=45)
-        plt.yticks(tick_marks, sorted(list(self.classes)))
-        plt.tight_layout()
-        plt.ylabel('Classe Real')
-        plt.xlabel('Classe Prevista')
-        plt.savefig('confusion_matrix.png')
+    # def confusion_matrix(ytrue, ypred):
+    #     return self.cm
+
+    # def plot_confusion_matrix(
+    #         self, title='Confusion matrix', cmap=plt.cm.Blues
+    #         ):
+    #     plt.imshow(self.cm, interpolation='nearest', cmap=cmap)
+    #     plt.title(title)
+    #     plt.colorbar()
+    #     tick_marks = np.arange(3)
+    #     plt.xticks(tick_marks, sorted(list(self.classes)), rotation=45)
+    #     plt.yticks(tick_marks, sorted(list(self.classes)))
+    #     plt.tight_layout()
+    #     plt.ylabel('Classe Real')
+    #     plt.xlabel('Classe Prevista')
+    #     plt.savefig('confusion_matrix.png')

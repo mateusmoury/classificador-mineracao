@@ -46,6 +46,4 @@ Exemplo:
 mg = MetricsGenerator(ytrue, ypred)
 print "Precision: %.2f" % (mg.macro_precision())
 print "Recall of class \'baseball\': %.2f" % (mg.class_recall('baseball'))
-print 'Storing confusion matrix graph on file \"confusion_matrix.png\"'
-mg.plot_confusion_matrix()
 ```
