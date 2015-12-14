@@ -2,7 +2,6 @@ from corpus_reader import CorpusReader
 from preprocess import PreProcess
 from tf_idf import TfIdf
 from knn import KNN
-import metrics
 from metrics import MetricsGenerator
 from pprint import pprint as pp
 
