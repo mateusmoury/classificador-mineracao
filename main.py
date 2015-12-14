@@ -45,7 +45,7 @@ if __name__ == '__main__':
           ytrue.append(topic)
           # classifica os documentos de teste
           words = parser.process_sent(doc)
-          query = tf_idf_calculator.generate_doc_vector(words)
+          query = tf_idf_calculator.generate_tf_vector(words)
           result = knn.classify(query)
           confusion_matrix[topic][result] += 1
           ypred.append(result)
