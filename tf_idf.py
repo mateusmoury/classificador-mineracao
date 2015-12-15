@@ -21,7 +21,8 @@ class TfIdf:
       self.document_frequency[word_id] = sum(1 for document in self.documents if word in document)
 
   def generate_tf_vector(self, document):
-    tf_vector = [(self.word_to_id[word], 1 + log(document.count(word))) for word in self.word_to_id if document.count(word) is not 0]
+    tf_vector = [(self.word_to_id[word], 1 + log(document.count(word))) for word in list(set(document)) if \
+                  word in self.word_to_id]
     tf_vector.sort()
 
     return tf_vector
