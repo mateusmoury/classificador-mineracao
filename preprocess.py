@@ -13,7 +13,7 @@ class PreProcess:
 
     def process_sent(self, snt):
         snt = self.tokenizer(snt)
-        snt = [self.stemmer.stem_word(wrd) for wrd in snt if \
+        snt = [self.stemmer.stem_word(wrd.lower()) for wrd in snt if \
                     wrd not in self.stop and \
                     wrd not in self.digits and \
                     wrd not in self.punct ]
